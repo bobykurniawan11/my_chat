@@ -19,7 +19,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             children: [
               Text(
                 "Welcome",
-                style: AppThemeData(context: context).my_textTheme.headline2,
+                style: AppThemeData(context: context).myTextTheme.headline2,
               ),
             ],
           ),
@@ -31,10 +31,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 height: 40.0,
                 minWidth: MediaQuery.of(context).size.width * .75,
                 color:
-                    AppThemeData(context: context).my_customTheme.primaryColor,
+                    AppThemeData(context: context).myCustomTheme.primaryColor,
                 child: new Text(
                   "Login",
-                  style: AppThemeData(context: context).my_textTheme.button,
+                  style: AppThemeData(context: context).myTextTheme.button,
                 ),
                 onPressed: () => {
                   Navigator.push(
@@ -52,10 +52,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 height: 40.0,
                 minWidth: MediaQuery.of(context).size.width * .75,
                 color:
-                    AppThemeData(context: context).my_customTheme.primaryColor,
+                    AppThemeData(context: context).myCustomTheme.primaryColor,
                 child: new Text(
                   "Register",
-                  style: AppThemeData(context: context).my_textTheme.button,
+                  style: AppThemeData(context: context).myTextTheme.button,
                 ),
                 onPressed: () => {},
                 shape: RoundedRectangleBorder(

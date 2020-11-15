@@ -23,7 +23,7 @@ class _LoginScreenState extends State<LoginScreen> {
       keyboardType: TextInputType.emailAddress,
       decoration: InputDecoration(
         labelText: "Email",
-        labelStyle: AppThemeData(context: context).my_textTheme.caption,
+        labelStyle: AppThemeData(context: context).myTextTheme.caption,
         enabledBorder: OutlineInputBorder(
           borderRadius: AppThemeData(context: context).borderRadius,
           borderSide: BorderSide(
@@ -36,7 +36,6 @@ class _LoginScreenState extends State<LoginScreen> {
               color: AppThemeData(context: context).colorSecondary,
             )),
       ),
-      validator: (email) {},
       textInputAction: TextInputAction.next,
     );
   }
@@ -46,7 +45,7 @@ class _LoginScreenState extends State<LoginScreen> {
       keyboardType: TextInputType.text,
       decoration: InputDecoration(
         labelText: "Password",
-        labelStyle: AppThemeData(context: context).my_textTheme.caption,
+        labelStyle: AppThemeData(context: context).myTextTheme.caption,
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
           borderSide: BorderSide(
@@ -66,17 +65,6 @@ class _LoginScreenState extends State<LoginScreen> {
           onPressed: _toggle,
         ),
       ),
-      validator: (password) {
-        Pattern pattern =
-            r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
-        RegExp regex = new RegExp(pattern);
-        if (password.isEmpty) {
-          return 'Please Enter Password';
-        } else if (!regex.hasMatch(password))
-          return 'Enter valid password';
-        else
-          return null;
-      },
       textInputAction: TextInputAction.done,
       obscureText: _obscureText,
     );
@@ -106,7 +94,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       Text(
                         "Welcome,",
                         style: AppThemeData(context: context)
-                            .my_textTheme
+                            .myTextTheme
                             .headline1,
                       ),
                       SizedBox(
@@ -115,7 +103,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       Text(
                         "Sign in to continue!",
                         style: AppThemeData(context: context)
-                            .my_textTheme
+                            .myTextTheme
                             .headline2,
                       ),
                     ],
@@ -135,7 +123,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: Text(
                           "Forgot Password ?",
                           style: AppThemeData(context: context)
-                              .my_textTheme
+                              .myTextTheme
                               .bodyText1,
                         ),
                       ),

@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:my_chat/bloc/splash_screen/splash_screen_bloc.dart';
-import 'package:my_chat/main.dart';
 import 'package:my_chat/page/splash_screen/splash_screeen.dart';
 import 'package:my_chat/page/welcome_screen/welcome_screen.dart';
 import 'package:my_chat/utils/app_theme.dart';

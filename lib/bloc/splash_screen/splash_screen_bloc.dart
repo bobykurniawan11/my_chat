@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:connectivity/connectivity.dart';
 import 'package:equatable/equatable.dart';
 import 'package:my_chat/utils/connection.dart';
 
@@ -19,8 +18,8 @@ class SplashScreenBloc extends Bloc<SplashScreenEvent, SplashScreenState> {
   ) async* {
     if (event is CheckInternet) {
       yield SplashScreenLoading();
-      final is_connected = await connection.check();
-      if (is_connected) {
+      final isConnected = await connection.check();
+      if (isConnected) {
         yield SplashScreenFinishSuccess();
       } else {
         yield SplashScreenFinishFailed();

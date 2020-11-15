@@ -10,7 +10,7 @@ class AppThemeData {
   final Color colorPrimary = Colors.green;
   final Color colorSecondary = Colors.redAccent;
 
-  TextTheme get my_textTheme {
+  TextTheme get myTextTheme {
     return GoogleFonts.latoTextTheme().copyWith(
       button: GoogleFonts.lato(
         textStyle: TextStyle(color: Colors.white, fontSize: 18),
@@ -27,7 +27,7 @@ class AppThemeData {
     );
   }
 
-  ThemeData get my_customTheme {
+  ThemeData get myCustomTheme {
     return ThemeData(primaryColor: colorPrimary);
   }
 }
