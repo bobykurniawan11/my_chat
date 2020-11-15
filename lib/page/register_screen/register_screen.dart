@@ -1,25 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:my_chat/page/register_screen/register_screen.dart';
-import 'package:my_chat/utils/app_theme_data.dart';
-import 'package:my_chat/utils/validator.dart';
+import '../../utils/app_theme_data.dart';
+import '../../utils/validator.dart';
 
-class LoginScreen extends StatefulWidget {
+class RegisterScreen extends StatefulWidget {
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  _RegisterScreenState createState() => _RegisterScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _RegisterScreenState extends State<RegisterScreen> {
   bool _obscureText = true;
   final _formKey = GlobalKey<FormState>();
   TextEditingController email_controller = TextEditingController();
+  TextEditingController fullname_controller = TextEditingController();
   TextEditingController password_controller = TextEditingController();
+  TextEditingController password_confirmation_controller =
+      TextEditingController();
+
   void _toggle() {
     setState(() {
       _obscureText = !_obscureText;
     });
   }
 
-  void validateLogin() {
+  void validateRegister() {
     if (_formKey.currentState.validate()) {
       _formKey.currentState.save();
     }
@@ -27,11 +30,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Widget emailInput() {
     return TextFormField(
-      key: Key("login_email_field"),
       controller: email_controller,
-      validator: (value) {
-        return Validator().validateEmail(value);
-      },
+      key: Key("register_email_field"),
       keyboardType: TextInputType.emailAddress,
       decoration: InputDecoration(
         labelText: "Email",
@@ -49,16 +49,43 @@ class _LoginScreenState extends State<LoginScreen> {
             )),
       ),
       textInputAction: TextInputAction.next,
+      validator: (value) {
+        return Validator().validateEmail(value);
+      },
+    );
+  }
+
+  Widget fullnameInput() {
+    return TextFormField(
+      key: Key("register_fullname_field"),
+      controller: fullname_controller,
+      keyboardType: TextInputType.emailAddress,
+      decoration: InputDecoration(
+        labelText: "Fullname",
+        labelStyle: AppThemeData(context: context).myTextTheme.caption,
+        enabledBorder: OutlineInputBorder(
+          borderRadius: AppThemeData(context: context).borderRadius,
+          borderSide: BorderSide(
+            color: Colors.grey.shade300,
+          ),
+        ),
+        focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(10),
+            borderSide: BorderSide(
+              color: AppThemeData(context: context).colorSecondary,
+            )),
+      ),
+      textInputAction: TextInputAction.next,
+      validator: (value) {
+        return Validator().validateFullname(value);
+      },
     );
   }
 
   Widget passInput() {
     return TextFormField(
-      key: Key("login_password_field"),
+      key: Key("register_password_field"),
       controller: password_controller,
-      validator: (value) {
-        return Validator().validatePassword(value);
-      },
       keyboardType: TextInputType.text,
       decoration: InputDecoration(
         labelText: "Password",
@@ -84,6 +111,45 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
       textInputAction: TextInputAction.done,
       obscureText: _obscureText,
+      validator: (value) {
+        return Validator().validatePassword(value);
+      },
+    );
+  }
+
+  Widget passConfirmationInput() {
+    return TextFormField(
+      key: Key("register_password_confirmation_field"),
+      controller: password_confirmation_controller,
+      keyboardType: TextInputType.text,
+      decoration: InputDecoration(
+        labelText: "Password Confirmation",
+        labelStyle: AppThemeData(context: context).myTextTheme.caption,
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: BorderSide(
+            color: Colors.grey.shade300,
+          ),
+        ),
+        focusedBorder: OutlineInputBorder(
+            borderRadius: AppThemeData(context: context).borderRadius,
+            borderSide: BorderSide(
+              color: AppThemeData(context: context).colorSecondary,
+            )),
+        suffixIcon: IconButton(
+          icon: Icon(
+            _obscureText ? Icons.visibility : Icons.visibility_off,
+            color: AppThemeData(context: context).colorPrimary,
+          ),
+          onPressed: _toggle,
+        ),
+      ),
+      textInputAction: TextInputAction.done,
+      obscureText: _obscureText,
+      validator: (value) {
+        return Validator()
+            .validatePasswordConfirmation(password_controller.text, value);
+      },
     );
   }
 
@@ -98,9 +164,7 @@ class _LoginScreenState extends State<LoginScreen> {
             padding: EdgeInsets.only(left: 16, right: 16),
             child: Form(
               key: _formKey,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.start,
+              child: ListView(
                 children: <Widget>[
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -109,21 +173,15 @@ class _LoginScreenState extends State<LoginScreen> {
                         height: 50,
                       ),
                       Text(
-                        "Welcome,",
+                        "Register Here, ",
                         style: AppThemeData(context: context)
                             .myTextTheme
                             .headline1,
                       ),
-                      SizedBox(
-                        height: 6,
-                      ),
-                      Text(
-                        "Sign in to continue!",
-                        style: AppThemeData(context: context)
-                            .myTextTheme
-                            .headline2,
-                      ),
                     ],
+                  ),
+                  SizedBox(
+                    height: 16,
                   ),
                   Column(
                     children: <Widget>[
@@ -131,7 +189,15 @@ class _LoginScreenState extends State<LoginScreen> {
                       SizedBox(
                         height: 16,
                       ),
+                      fullnameInput(),
+                      SizedBox(
+                        height: 16,
+                      ),
                       passInput(),
+                      SizedBox(
+                        height: 12,
+                      ),
+                      passConfirmationInput(),
                       SizedBox(
                         height: 12,
                       ),
@@ -151,7 +217,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         height: 50,
                         width: double.infinity,
                         child: FlatButton(
-                          onPressed: validateLogin,
+                          onPressed: validateRegister,
                           padding: EdgeInsets.all(0),
                           child: Ink(
                             decoration: BoxDecoration(
@@ -165,7 +231,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               constraints: BoxConstraints(
                                   maxWidth: double.infinity, minHeight: 50),
                               child: Text(
-                                "Login",
+                                "Register",
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold),
@@ -180,38 +246,21 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                       SizedBox(
-                        height: 16,
-                      ),
-                      SizedBox(
-                        height: 16,
+                        height: 50,
                       ),
                     ],
                   ),
                   Padding(
-                    padding: EdgeInsets.only(bottom: 10),
+                    padding: EdgeInsets.only(bottom: 30),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        Text(
-                          "Don't have an account?",
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                        SizedBox(
-                          width: 5,
-                        ),
                         GestureDetector(
                           onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) {
-                                  return RegisterScreen();
-                                },
-                              ),
-                            );
+                            Navigator.pop(context);
                           },
                           child: Text(
-                            "Sign up",
+                            "Back",
                             style: TextStyle(
                                 fontWeight: FontWeight.bold, color: Colors.red),
                           ),

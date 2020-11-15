@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_chat/page/login_screen/login_screen.dart';
+import 'package:my_chat/page/register_screen/register_screen.dart';
 import 'package:my_chat/utils/app_theme_data.dart';
 
 class WelcomeScreen extends StatefulWidget {
@@ -28,6 +29,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               MaterialButton(
+                key: Key("login_btn"),
                 height: 40.0,
                 minWidth: MediaQuery.of(context).size.width * .75,
                 color:
@@ -49,6 +51,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 ),
               ),
               MaterialButton(
+                key: Key("register_btn"),
                 height: 40.0,
                 minWidth: MediaQuery.of(context).size.width * .75,
                 color:
@@ -57,7 +60,14 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   "Register",
                   style: AppThemeData(context: context).myTextTheme.button,
                 ),
-                onPressed: () => {},
+                onPressed: () => {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => RegisterScreen(),
+                    ),
+                  ),
+                },
                 shape: RoundedRectangleBorder(
                   borderRadius: AppThemeData(context: context).borderRadius,
                 ),
