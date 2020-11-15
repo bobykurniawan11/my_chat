@@ -39,9 +39,7 @@ class _SplashScreenState extends State<SplashScreen> {
                         CircularProgressIndicator(),
                         Text(
                           "Checking your internet ...",
-                          style: AppThemeData(context: context)
-                              .my_textTheme
-                              .button,
+                          style: AppThemeData(context: context).myTextTheme.button,
                         ),
                       ],
                     ),
@@ -61,9 +59,7 @@ class _SplashScreenState extends State<SplashScreen> {
                         Icon(Icons.warning),
                         Text(
                           "Please Check Your Internet Connection",
-                          style: AppThemeData(context: context)
-                              .my_textTheme
-                              .button,
+                          style: AppThemeData(context: context).myTextTheme.button,
                         )
                       ],
                     ),
@@ -87,13 +83,21 @@ class _SplashScreenState extends State<SplashScreen> {
 }
 
 class WelcomeScreenRoute extends MaterialPageRoute {
-  WelcomeScreenRoute()
-      : super(builder: (BuildContext context) => new WelcomeScreen());
+  WelcomeScreenRoute() : super(builder: (BuildContext context) => new WelcomeScreen());
 
   // OPTIONAL IF YOU WISH TO HAVE SOME EXTRA ANIMATION WHILE ROUTING
   @override
-  Widget buildPage(BuildContext context, Animation<double> animation,
-      Animation<double> secondaryAnimation) {
-    return new WelcomeScreen();
+  Widget buildPage(
+      BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) {
+    return new RotationTransition(
+      turns: animation,
+      child: new ScaleTransition(
+        scale: animation,
+        child: new FadeTransition(
+          opacity: animation,
+          child: new WelcomeScreen(),
+        ),
+      ),
+    );
   }
 }
